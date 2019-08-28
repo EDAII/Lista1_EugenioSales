@@ -1,0 +1,23 @@
+body {
+    background-color: whitesmoke;
+    padding: 10 px;
+    margin: 0;
+}
+
+header {
+    background-color: #f073e1;
+    margin: 10px;
+}
+
+nav {
+    background-color: #f073e1;
+    margin: 10px;
+}
+footer {
+    background-color: #f073e1;
+    margin: 10px;
+}
+
+legend {
+    font-size: 20px;
+}
