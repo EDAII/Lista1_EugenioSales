@@ -9,7 +9,7 @@ let lineChart = new Chart(chart, {
         //labels: ["January", "February", "March", "Apri", "May", "June"],
         labels: [2, 3, 4, 5, 6, 7, 8],
         datasets: [{ 
-            label: "EDA 2 vai ser é doido parceiro",
+            label: "Primeiro método",
             data: data,
             borderWidth: 6,
             borderColor: 'rgba(75, 75, 192, 0.4)',
@@ -64,7 +64,7 @@ let barChart = new Chart(barCtx, {
     data: {
         labels: [1, 2, 3, 4, 6, 7, 8],
         datasets: [{
-            label: 'Vou dominar o mundo parceiro',
+            label: 'Segundo método',
             data: [10, 20, 30, 45, 25],
             backgroundColor: '#00FF00',
             borderWidth: 2,
