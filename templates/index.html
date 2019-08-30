@@ -26,8 +26,8 @@
         <div class="pos-f-t">
                 <div class="collapse" id="navbarToggleExternalContent">
                   <div class="bg-dark p-4">
-                    <h5 class="text-white h4">Collapsed content</h5>
-                    <span class="text-muted">Toggleable via the navbar brand.</span>
+                    <h5 class="text-white h4">Search Methods Comparator</h5>
+                    <span class="text-muted">Time x Steps</span>
                   </div>
                 </div>
                     <nav class="navbar navbar-dark bg-dark">
@@ -57,7 +57,7 @@
                 <div class="col-sm">
 
                         
-                        <form action="/data" method="POST">
+                        <form action="/" method="POST">
                             <legend>Primeiro método de busca:</legend>
                             <input placeholder="Selecione" name="primeiraBusca" required="required" list="primeiraBusca">
                                 <datalist id="primeiraBusca">
@@ -78,44 +78,128 @@
                                     <option value="Arvore">
                                 </datalist>
                             <p>
-                                <input class="btn btn-outline-success" style="margin-bottom:20px; margin-top: 10px" type="submit" value="Submit">
+                                <input class="btn btn-outline-success" id="loadData" style="margin-bottom:20px; margin-top: 10px" type="submit" value="Submit">
                             </p>
                         </form>
                 </div>
                 <div class="col-sm">
+                        <h5>(Provisório)</h5>
                         <legend>Selecione o método de busca:</legend>
-                        <form action="bla" method="POST">
+                        <form action="/" method="POST">
                             <input type="radio" name="busca" value="linear" checked> Linear<br>
                             <input type="radio" name="busca" value="binario"> Binário<br>
                             <input type="radio" name="busca" value="interpolacao"> Interpolação <br>
                             <input class="btn btn-outline-success" style="margin-bottom:20px; margin-top: 10px" type="submit" value="Submit">
                         </form>
                 </div>
-                <div class="col-sm" id="demo">
-                    <h2>Let AJAX change this text</h2>
-                    <button type="button" onclick="loadDoc()">Change Content</button>
+                <div class="col-xd">
+                    <h1>Método Selecionado</h1>
+                    {% if searchMeth %}
+                    <p>{{searchMeth}}</p>
+                    {% else %}
+                    <p>Nenhum Selecionado</p>
+                    {% endif%}
                 </div>
             </div>
         </div>
 
+        
+
         <script>
-            function loadDoc() {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                    var obj = JSON.parse(this.responseText)
-                    document.getElementById("demo").innerHTML = obj;
+            const chart = document.getElementById("lineChart");
+
+            //let data = [5, 10, 5, 14, 20, 15, 22, 32, 12, 1];
+            var data = []
+
+            var url = window.location.pathname;
+            console.log(url);
+
+
+            if(url == '/'){
+                console.log('ads');
+                data = JSON.parse({{ value | tojson }});
+                console.log(data);
+            }
+             
+
+            let lineChart = new Chart(chart, {
+                type: 'line',
+                data: {
+                    labels: ["January", "February", "March", "Apri", "May", "June"],
+                    //labels: [4, 5, 6, 7, 8],
+                    datasets: [{
+                        label: "Primeiro método",
+                        data: data,
+                        borderWidth: 6,
+                        borderColor: 'rgba(75, 75, 192, 0.4)',
+                        backgroundColor: 'rgba(75, 75, 192, 0.4)',
+                        lineTension: 0,
+                        fill: false,
+                        pointStyle: "star",
+                        pointBorderColor: 'rgba(23, 122, 102, 0.7)',        
+
+                        }
+                    ]
+                },
+                options: {
+                    showLines: true,
+                    stacked: false,
+                    elementspointradius: 10,
+                    scales: {
+
+                        xAxes: [{
+                            ticks:{
+                                beginAtZero: true,
+                                fontColor: 'black',
+                                min: 0,
+                                max: 30,
+                                gridLines: {
+                                    color: "rgba(0, 0, 0, 0)",
+                                },
+                            }
+                        }],
+
+                        yAxes: [{
+                            ticks:{
+                                beginAtZero: true,
+                                min: 0,
+                                max: 30,
+                                fontColor: 'black',
+                                gridLines: {
+                                    color: "rgba(0, 0, 0, 0)",
+                                },
+                            }
+                        }]
                     }
-                };
-                xhttp.open("GET", "/data", true);
-                xhttp.send();
+                } 
+            });
+
+            const barCtx = document.getElementById("barChart");
+
+            Chart.defaults.scale.ticks.beginAtZero = true;
+
+            let barChart = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: [1, 2, 3, 4, 6, 7, 8],
+                    datasets: [{
+                        label: 'Segundo método',
+                        data: [10, 20, 30, 45, 25],
+                        backgroundColor: '#00FF00',
+                        borderWidth: 2,
+                        borderColor: 'rgba(75, 75, 192, 0.4)',
+                    }]
                 }
+            });
+
         </script>
+                
+            
+        
     
     
+                
     
-    
-    <script src="../static/chart.js"></script>
     
     {% endblock %}
 </body>
