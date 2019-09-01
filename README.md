@@ -1,2 +1,3 @@
-# Lista1_EugenioSales
-First project of Data Structures 1
+# Esse repositório deve ser desconsiderado
+
+Segur o link do repositório referente ao trabalho 1: https://github.com/EDAII/Lista1_Eugenio_Sales
